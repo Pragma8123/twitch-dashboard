@@ -1,6 +1,11 @@
+Vue.component('modal', {
+  template: '#modal-template'
+})
+
 var app = new Vue({
     el: '#app',
     data: {
-        message: 'Hello World!'
+        message: 'Twitch Dashboard!',
+        showModal: true
     }
 })
