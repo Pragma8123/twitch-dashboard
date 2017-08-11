@@ -1,12 +1,35 @@
+/*-- Global Styles --*/
+* {
+  font-family: 'Hammersmith One', Helvetica, Arial, sans-serif;
+}
+
 h1 {
   color: #6441a5;
   font-family: 'Fugaz One', Helvetica, Arial, sans-serif;
 }
 
-h3 h4 h5 h6 {
-  font-family: 'Hammersmith One', Helvetica, Arial, sans-serif;
+h2 h3 h4 h5 h6 {
+  font-family: 'Saira', Helvetica, Arial, sans-serif;
 }
 
+button {
+  background: #6441a5;
+  color: #fff;
+  padding: 3px 5px;
+}
+
+.hidden {
+  display: none;
+}
+/*-- End of Global Styles --*/
+
+/*-- Form Styles --*/
+#twitchid {
+  vertical-align: middle;
+}
+/*-- End of Form Styles --*/
+
+/*-- Modal Styles --*/
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -43,10 +66,6 @@ h3 h4 h5 h6 {
   margin: 20px 0;
 }
 
-.modal-default-button {
-  float: right;
-}
-
 /*
  * The following styles are auto-applied to elements with
  * transition="modal" when their visibility is toggled
@@ -69,3 +88,4 @@ h3 h4 h5 h6 {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+/*-- End of Modal Styles --*/
