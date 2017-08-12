@@ -44,6 +44,8 @@ var app = new Vue({
       })
         .then(response => {
           this.localUser.twitchUserId = response.data.users[0]._id;
+          // Let's start with 5 follows
+          this.getFollowList(this.localUser.twitchUserId, 5);
           if (debug) {
             console.log(this.localUser.twitchUserId);
           }
@@ -74,7 +76,7 @@ var app = new Vue({
         .then(response => {
           this.localUser.follows = response.data.follows;
           if (debug) {
-            console.log('Got ' + response.data._total + ' followers');
+            console.log(response.data._total + ' followed channels');
           }
         })
         .catch(error => {
