@@ -1,6 +1,6 @@
 var debug = true; // Setting for all testing to be switched on; change to false once we are finished
 
-// WARNING: Need to take this out of the client when we are ready to deploy!!! 
+// WARNING: Need to take this out of the client when we are ready to deploy!!!
 const twitchClientId = '';
 
 Vue.component('modal', {
@@ -18,7 +18,8 @@ var app = new Vue({
     },
     showModal: true,
     localUser: {
-      twitchUsername: ''
+      twitchUsername: '',
+      follows: []
     }
   },
   methods: {
@@ -57,7 +58,30 @@ var app = new Vue({
           this.modalText.heading = 'Twitch Username Not Found!';
           this.modalText.body = 'Try again!';
         })
+    },
+    getFollowList: function(userId, count) { // Twitch API Client-ID, User Id, and follower count
+      axios({
+        method: 'get',
+        url: 'https://api.twitch.tv/kraken/users/' + userId + '/follows/channels',
+        headers: {
+          'Client-ID': twitchClientId,
+          'Accept': 'application/vnd.twitchtv.v5+json'
+        },
+        params: {
+          limit: count
+        }
+      })
+        .then(response => {
+          this.localUser.follows = response.data.follows;
+          if (debug) {
+            console.log('Got ' + response.data._total + ' followers');
+          }
+        })
+        .catch(error => {
+          if (debug) {
+            console.log(error);
+          }
+        })
     }
   }
 })
-
