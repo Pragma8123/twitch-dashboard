@@ -5,7 +5,11 @@ const twitchClientId = '';
 
 Vue.component('modal', {
   template: '#modal-template'
-})
+});
+
+Vue.component('custom-header', {
+  template: '#custom-header-template'
+});
 
 var app = new Vue({
   el: '#app',
@@ -19,6 +23,7 @@ var app = new Vue({
     showModal: true,
     localUser: {
       twitchUsername: '',
+      twitchUserId:'',
       follows: []
     }
   },
@@ -45,7 +50,7 @@ var app = new Vue({
         .then(response => {
           this.localUser.twitchUserId = response.data.users[0]._id;
           // Let's start with 5 follows
-          this.getFollowList(this.localUser.twitchUserId, 5);
+          this.getFollowList(this.localUser.twitchUserId);
           if (debug) {
             console.log(this.localUser.twitchUserId);
           }
@@ -61,7 +66,7 @@ var app = new Vue({
           this.modalText.body = 'Try again!';
         })
     },
-    getFollowList: function(userId, count) { // Twitch API Client-ID, User Id, and follower count
+    getFollowList: function(userId, count) { // Twitch API Client-ID, User Id, and follows count
       axios({
         method: 'get',
         url: 'https://api.twitch.tv/kraken/users/' + userId + '/follows/channels',

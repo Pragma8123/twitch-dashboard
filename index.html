@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- Fonts and animations -->
     <script src="https://use.fontawesome.com/dc53c36ede.js"></script>
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Hammersmith+One|Saira" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
     <!-- End Fonts -->
 
     <link rel="stylesheet" href="CSS/styles.css">
@@ -17,9 +19,8 @@
   <!-- App -->
 
     <div id="app">
-      <h1>{{header}}</h1>
+      <custom-header></custom-header>
       <modal v-if="showModal" @close="showModal = false">
-        <!-- Put custom modal content here, will override template -->
         <h3 slot="header">{{modalText.heading}}</h3>
         <p slot="body">{{modalText.body}}</p>
         <div v-if="modalText.inputFieldVisible" slot="footer">
@@ -38,6 +39,7 @@
       ***** Vue Templates *****
     -->
 
+    <!-- Modal Template -->
     <template id="modal-template">
 
       <transition name="modal">
@@ -69,7 +71,21 @@
       </transition>
 
     </template>
+    <!-- End of Modal Template -->
 
+    <!-- Custom Header Template -->
+    <template id="custom-header-template">
+      <header>
+        <h1>Twitch Dashboard</h1>
+        <nav>
+          <a href="#">Streams</a>
+          <a href="#">Clips</a>
+          <a href="#">Videos</a>
+          <a href="#">Top of Twitch</a>
+        </nav>
+      </header>
+    </template>
+    <!-- End of Header Template -->
     <!--
       ***** End Templates *****
     -->

@@ -4,7 +4,7 @@
 }
 
 h1 {
-  color: #6441a5;
+  color: #ffffff;
   font-family: 'Fugaz One', Helvetica, Arial, sans-serif;
 }
 
@@ -17,12 +17,33 @@ button {
   color: #fff;
   padding: 3px 5px;
 }
-
-.hidden {
-  display: none;
-}
 /*-- End of Global Styles --*/
+/*-- Header Styles --*/
+header {
+  background: #6441a5;
+  text-align: center;
+}
 
+header > h1 {
+  font-size: 24px;
+  margin: 0;
+  padding: 5px;
+}
+
+header > nav {
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+header > nav a {
+  
+  color: #ffffff;
+  font-family: 'Saira', Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  padding-bottom: 5px;
+}
+/*-- End of Header Styles --*/
 /*-- Form Styles --*/
 #twitchid {
   vertical-align: middle;
@@ -89,3 +110,56 @@ button {
   transform: scale(1.1);
 }
 /*-- End of Modal Styles --*/
+
+/*-- Tablet Media Queries --*/
+@media (min-width: 696px) {
+  /*-- Header Styles --*/
+  header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  header > h1 {
+    padding: 10px;
+    font-size: 30px;
+  }
+
+  header > nav {
+    display: inline;
+  }
+
+  header > nav a {
+    font-size: 20px;
+    margin: 0 5px;
+  }
+  /*-- End of Header Styles --*/
+}
+/*-- End of Tablet Media Queries --*/
+
+/*-- Desktop Media Queries --*/
+@media (min-width: 1242px) {
+  /*-- Global Styles --*/
+  #app {
+    width: 75%;
+    margin: 0 auto;
+  }
+  /*-- End of Global Styles --*/
+
+  /*-- Header Styles --*/
+  header {
+    justify-content: space-between;
+  }
+
+  header > h1 {
+    font-size: 42px;
+    padding: 12px;
+  }
+
+  header > nav a {
+    font-size: 26px;
+    margin: 0 10px;
+  }
+  /*-- End of Header Styles --*/
+}
+/*-- End of Desktop Media Queries --*/
