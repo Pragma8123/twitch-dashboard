@@ -30,6 +30,8 @@ var app = new Vue({
   methods: {
     captureTwitchId: function() {
       var twitchIdInput = document.getElementById('twitchid');
+      twitchIdInput.disabled = true;
+      document.getElementById('twitchid-button').disabled = true;
       this.localUser.twitchUsername = twitchIdInput.value;
       if (debug)
         console.log(this.localUser.twitchUsername);
@@ -49,21 +51,23 @@ var app = new Vue({
       })
         .then(response => {
           this.localUser.twitchUserId = response.data.users[0]._id;
-          // Let's start with 5 follows
-          this.getFollowList(this.localUser.twitchUserId);
           if (debug) {
             console.log(this.localUser.twitchUserId);
           }
+          // Let's start with 5 follows
+          this.getFollowList(this.localUser.twitchUserId);
           this.modalText.inputFieldVisible = false;
           this.modalText.heading = 'Hello ' + this.localUser.twitchUsername + '!';
           this.modalText.body = 'We are setting up your dashboard right now...';
         })
         .catch(error => {
-          if(debug){
+          if(debug) {
             console.log(error);
           }
           this.modalText.heading = 'Twitch Username Not Found!';
           this.modalText.body = 'Try again!';
+          document.getElementById('twitchid').disabled = false;
+          document.getElementById('twitchid-button').disabled = false;
         })
     },
     getFollowList: function(userId, count) { // Twitch API Client-ID, User Id, and follows count

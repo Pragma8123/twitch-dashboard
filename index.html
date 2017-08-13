@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+
     <!-- Fonts and animations -->
     <script src="https://use.fontawesome.com/dc53c36ede.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Hammersmith+One|Saira" rel="stylesheet">
@@ -23,11 +23,11 @@
       <modal v-if="showModal" @close="showModal = false">
         <h3 slot="header">{{modalText.heading}}</h3>
         <p slot="body">{{modalText.body}}</p>
-        <div v-if="modalText.inputFieldVisible" slot="footer">
-          <input id="twitchid" name="twitchid" @keyup.enter="captureTwitchId()">
-          <button class="modal-default-button" @click="captureTwitchId()">Submit</button>
+        <div v-show="modalText.inputFieldVisible" slot="footer">
+          <input id="twitchid" name="twitchid" placeholder="Username..." @keyup.enter="captureTwitchId()">
+          <button id="twitchid-button" class="modal-default-button" @click="captureTwitchId()">Submit</button>
         </div>
-        <div v-if="!modalText.inputFieldVisible" slot="footer">
+        <div v-show="!modalText.inputFieldVisible" slot="footer">
           <i class="fa fa-3x fa-circle-o-notch fa-spin"></i>
         </div>
       </modal>
@@ -61,7 +61,7 @@
 
               <div class="modal-footer">
                 <slot name="footer">
-                  
+
                 </slot>
               </div>
 
