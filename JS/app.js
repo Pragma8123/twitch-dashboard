@@ -24,7 +24,8 @@ var app = new Vue({
     localUser: {
       twitchUsername: '',
       twitchUserId:'',
-      follows: []
+      follows: [],
+      followStreams: []
     }
   },
   methods: {
@@ -86,6 +87,39 @@ var app = new Vue({
           this.localUser.follows = response.data.follows;
           if (debug) {
             console.log(response.data._total + ' followed channels');
+          }
+        })
+        .catch(error => {
+          if (debug) {
+            console.log(error);
+          }
+        })
+    },
+
+    /**
+    * Check channels for any active live streams
+    * @param {string} channels - A comma-separated list of channel IDs to Check
+    * @param {number} count - Maximum amount of results
+    */
+    getLiveStreams: function(channels, count) {
+      axios({
+        method: 'get',
+        url: 'https://api.twitch.tv/kraken/streams/',
+        headers: {
+          'Client-ID': twitchClientId,
+          'Accept': 'application/vnd.twitchtv.v5+json'
+        },
+        params: {
+          channel: channels,
+          language: 'en',
+          stream_type: 'live',
+          limit: count
+        }
+      })
+        .then(response => {
+          this.localUser.followStreams = response.data.streams;
+          if (debug) {
+            console.log(response.data._total + ' follows are live-streaming');
           }
         })
         .catch(error => {
