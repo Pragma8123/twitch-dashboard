@@ -3,18 +3,72 @@ var debug = true; // Setting for all testing to be switched on; change to false 
 // WARNING: Need to take this out of the client when we are ready to deploy!!!
 const twitchClientId = '';
 
+
+/*
+***** Global Components *****
+*/
+
+// <modal>
 Vue.component('modal', {
   template: '#modal-template'
 });
 
-Vue.component('custom-header', {
-  template: '#custom-header-template'
-});
+/*
+***** End Global Components *****
+*/
+
+/*
+***** Sub-Components *****
+*/
+
+// <custom-header>
+var customHeader = {
+  template: '#custom-header-template',
+  methods: {
+    changeContent: function(content) {
+      if (debug)
+        console.log("changeContent(" + content + ")");
+      this.$emit('change-content', content);
+    }
+  }
+};
+
+// <custom-content>
+var customContent = {
+  template: '#custom-content-template',
+  props: {
+    content: {
+      type: String,
+      required: true
+    }
+  },
+  components: {
+    'live-streams': {
+      template: '#live-streams-template'
+    },
+    'clips': {
+      template: '#clips-template'
+    },
+    'videos': {
+      template: '#videos-template'
+    },
+    'twitch-top': {
+      template: '#twitch-top-template'
+    }
+  }
+};
+
+/*
+***** End Sub-Components *****
+*/
 
 var app = new Vue({
   el: '#app',
   data: {
     header: 'Twitch Dashboard!',
+    body: {
+      content: ''
+    },
     modalText: {
       heading: 'Twitch Username Needed',
       body: 'Please enter your Twitch Username to use the app!',
@@ -22,11 +76,15 @@ var app = new Vue({
     },
     showModal: true,
     localUser: {
-      twitchUsername: '',
-      twitchUserId:'',
-      follows: [],
-      followStreams: []
+      twitchUsername: String,
+      twitchUserId: String,
+      follows: Array,
+      followStreams: Array
     }
+  },
+  components: {
+    'custom-header': customHeader,
+    'custom-content': customContent
   },
   methods: {
     captureTwitchId: function() {
@@ -88,6 +146,8 @@ var app = new Vue({
           if (debug) {
             console.log(response.data._total + ' followed channels');
           }
+          // Close the modal after we're done with basic setup
+          this.showModal = false;
         })
         .catch(error => {
           if (debug) {
@@ -127,6 +187,11 @@ var app = new Vue({
             console.log(error);
           }
         })
+    },
+    changeContent: function(content) {
+      if (debug)
+        console.log(content);
+      this.body.content = content;
     }
   }
 })

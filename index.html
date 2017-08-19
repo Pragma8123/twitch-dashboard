@@ -19,7 +19,9 @@
   <!-- App -->
 
     <div id="app">
-      <custom-header></custom-header>
+      <custom-header @change-content="changeContent"></custom-header>
+      <custom-content :content='body.content'></custom-content>
+
       <modal v-if="showModal" @close="showModal = false">
         <h3 slot="header">{{modalText.heading}}</h3>
         <p slot="body">{{modalText.body}}</p>
@@ -78,14 +80,66 @@
       <header>
         <h1>Twitch Dashboard</h1>
         <nav>
-          <a href="#">Streams</a>
-          <a href="#">Clips</a>
-          <a href="#">Videos</a>
-          <a href="#">Top of Twitch</a>
+          <a href="#" @click="changeContent('streams')">Streams</a>
+          <a href="#" @click="changeContent('clips')">Clips</a>
+          <a href="#" @click="changeContent('videos')">Videos</a>
+          <a href="#" @click="changeContent('top')">Top of Twitch</a>
         </nav>
       </header>
     </template>
     <!-- End of Header Template -->
+
+    <!-- Live Streams Template -->
+    <template id="live-streams-template">
+      <div>
+        <p>streams</p>
+      </div>
+    </template>
+    <!-- End Live Streams Template -->
+
+    <!-- Clips Template -->
+    <template id="clips-template">
+      <div>
+        <p>clips</p>
+      </div>
+    </template>
+    <!-- End Clips Template -->
+
+    <!-- Videos Template -->
+    <template id="videos-template">
+      <div>
+        <p>videos</p>
+      </div>
+    </template>
+    <!-- End Videos Template -->
+
+    <!-- Twitch Top Template -->
+    <template id="twitch-top-template">
+      <div>
+        <p>twitch top</p>
+      </div>
+    </template>
+    <!-- End Twitch Top Template -->
+
+    <!-- Custom Content Template -->
+    <template id="custom-content-template">
+      <div class="content-body">
+        <div v-if="content === 'streams'">
+          <live-streams></live-streams>
+        </div>
+        <div v-else-if="content === 'clips'">
+          <clips></clips>
+        </div>
+        <div v-else-if="content === 'videos'">
+          <videos></videos>
+        </div>
+        <div v-else-if="content === 'top'">
+          <twitch-top></twitch-top>
+        </div>
+      </div>
+    </template>
+    <!-- End Custome Content Template -->
+
     <!--
       ***** End Templates *****
     -->
