@@ -26,8 +26,18 @@
         <h3 slot="header">{{modalText.heading}}</h3>
         <p slot="body">{{modalText.body}}</p>
         <div v-show="modalText.inputFieldVisible" slot="footer">
-          <input id="twitchid" name="twitchid" placeholder="Username..." @keyup.enter="captureTwitchId()">
-          <button id="twitchid-button" class="modal-default-button" @click="captureTwitchId()">Submit</button>
+          <input
+          id="twitchid"
+          name="twitchid"
+          placeholder="Username..."
+          @keyup.enter="captureTwitchId"
+          >
+          <button
+          id="twitchid-button"
+          class="modal-default-button"
+          @click="captureTwitchId">
+          Submit
+          </button>
         </div>
         <div v-show="!modalText.inputFieldVisible" slot="footer">
           <i class="fa fa-3x fa-circle-o-notch fa-spin"></i>

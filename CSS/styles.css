@@ -13,9 +13,25 @@ h2 h3 h4 h5 h6 {
 }
 
 button {
-  background: #6441a5;
-  color: #fff;
-  padding: 3px 5px;
+  background-color: white;
+  border-radius: 2px;
+  border: 2px solid #6441a5;
+  color: #6441a5;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:hover {
+  background-color: #6441a5;
+  color: white;
 }
 /*-- End of Global Styles --*/
 /*-- Header Styles --*/
@@ -37,7 +53,7 @@ header > nav {
 }
 
 header > nav a {
-  
+
   color: #ffffff;
   font-family: 'Saira', Helvetica, Arial, sans-serif;
   text-decoration: none;
